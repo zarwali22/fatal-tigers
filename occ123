@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Casio</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            width: 500px;
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .screen {
+            width: 96%;
+            height: 50px;
+            background: #fff;
+            text-align: right;
+            font-size: 1.5em;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .operator {
+            background: orange;
+            color: white;
+            height: 70px; /* Augmente la hauteur */
+        }
+        .clear {
+            background: red;
+            color: white;
+        }
+        .equal {
+            background: green;
+            color: white;
+            font-size: 1.5em;
+            height: 70px;  /* Augmente la hauteur */
+            grid-column: span 2; /* Le bouton "=" prend deux colonnes */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearScreen()">C</button>
+            <button onclick="appendToScreen('(')">(</button>
+            <button onclick="appendToScreen(')')">)</button>
+            <button class="operator" onclick="appendToScreen('/')">/</button>
+            <button onclick="appendToScreen('7')">7</button>
+            <button onclick="appendToScreen('8')">8</button>
+            <button onclick="appendToScreen('9')">9</button>
+            <button class="operator" onclick="appendToScreen('*')">*</button>
+            <button onclick="appendToScreen('4')">4</button>
+            <button onclick="appendToScreen('5')">5</button>
+            <button onclick="appendToScreen('6')">6</button>
+            <button class="operator" onclick="appendToScreen('-')">-</button>
+            <button onclick="appendToScreen('1')">1</button>
+            <button onclick="appendToScreen('2')">2</button>
+            <button onclick="appendToScreen('3')">3</button>
+            <button class="operator" onclick="appendToScreen('+')">+</button>
+            <button onclick="appendToScreen('0')">0</button>
+            <button onclick="appendToScreen('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button> <!-- Bouton "=" plus grand -->
+        </div>
+    </div>
+
+    <script>
+        function appendToScreen(value) {
+            let screen = document.getElementById('screen');
+            if (screen.innerText === '0') {
+                screen.innerText = value;
+            } else {
+                screen.innerText += value;
+            }
+        }
+
+        function clearScreen() {
+            document.getElementById('screen').innerText = '0';
+        }
+
+        function calculate() {
+            let screen = document.getElementById('screen');
+            try {
+                screen.innerText = eval(screen.innerText);
+            } catch (e) {
+                screen.innerText = 'Erreur';
+            }
+        }
+    </script>
+</body>
+</html>
+
